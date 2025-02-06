@@ -1,0 +1,83 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "money_sync"
+version = "1.0"
+requires-python = ">= 3.11"
+dependencies = [
+    "fastapi==0.110.0",
+    "sqlmodel==0.0.16",
+    "dynaconf==3.2.4",
+    "uvicorn==0.27.1",
+    "psycopg2-binary==2.9.9",
+    "alembic==1.13.1",
+    "rich==13.7.1",
+    "typer==0.9.0"
+]
+
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ipdb",
+    "ipython",
+    "pip-tools",
+    "pyright",
+    "flake8",
+    "black",
+    "isort",
+]
+
+[project.scripts]
+ms = "api.cli:main"
+
+[tool.setuptools]
+packages = ["api"]
+
+[tool.setuptools_scm]
+write_to = "api/VERSION.txt"
+
+[tool.setuptools.dynamic]
+readme = { file = ["docs/README.md"] }
+dependencies = { file = "requirements.txt" }
+
+
+[tool.pytest.ini_options]
+testpaths = 'tests'
+xfail_strict = true
+filterwarnings = ['error', 'ignore:path is deprecated.*:DeprecationWarning:']
+markers = [
+    "asyncio",
+]
+
+[tool.coverage.run]
+source = ['api']
+branch = true
+context = '${CONTEXT}'
+
+[tool.coverage.report]
+precision = 2
+exclude_lines = [
+	'pragma: no cover',
+	'raise NotImplementedError',
+	'if TYPE_CHECKING:',
+	'@overload',
+]
+
+[tool.black]
+color = true
+line-length = 100
+target-version = ['py310']
+skip-string-normalization = true
+
+[tool.isort]
+line_length = 100
+known_first_party = 'api'
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true
