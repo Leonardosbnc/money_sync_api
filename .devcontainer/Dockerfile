@@ -25,5 +25,3 @@ USER app
 
 EXPOSE 8080
 CMD python3 -m uvicorn api.app:app --reload --host 0.0.0.0 --port 8080
-
-

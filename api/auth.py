@@ -1,4 +1,5 @@
 """Token based auth"""
+
 from datetime import datetime, timedelta
 from typing import Callable, Optional, Union
 from functools import partial
@@ -67,9 +68,7 @@ def create_access_token(
 create_refresh_token = partial(create_access_token, scope="refresh_token")
 
 
-def authenticate_user(
-    get_user: Callable, username: str, password: str
-) -> Union[User, bool]:
+def authenticate_user(get_user: Callable, username: str, password: str) -> Union[User, bool]:
     """Authenticate the user"""
     user = get_user(username)
     if not user:
@@ -87,9 +86,7 @@ def get_user(username) -> Optional[User]:
 
 
 def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    request: Request = None,  # pyright: ignore
-    fresh=False
+    token: str = Depends(oauth2_scheme), request: Request = None, fresh=False  # pyright: ignore
 ) -> User:
     """Get current user authenticated"""
     credentials_exception = HTTPException(
@@ -107,9 +104,7 @@ def get_current_user(
 
     try:
         payload = jwt.decode(
-            token,
-            SECRET_KEY,  # pyright: ignore
-            algorithms=[ALGORITHM]  # pyright: ignore
+            token, SECRET_KEY, algorithms=[ALGORITHM]  # pyright: ignore  # pyright: ignore
         )
         username: str = payload.get("sub")  # pyright: ignore
 
@@ -128,6 +123,7 @@ def get_current_user(
 
 
 # FastAPI dependencies
+
 
 async def get_current_active_user(
     current_user: User = Depends(get_current_user),
