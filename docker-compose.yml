@@ -4,7 +4,7 @@ name: money-sync-api
 services:
   app:
     build:
-      context: ..
+      context: .
       dockerfile: ./Dockerfile
 
     volumes:
