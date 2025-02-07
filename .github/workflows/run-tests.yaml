@@ -14,5 +14,8 @@ jobs:
       uses: hoverkraft-tech/compose-action@v2.0.1
       with:
         compose-file: "./docker-compose.yml"
+      env:
+        MS_ENV: "testing"
+        MS_SECURITY__SECRET_KEY: ${{ secrets.TEST_SECRET_KEY }}
     - name: Run Tests
       run: docker exec money-sync-api-app-1 pytest tests/__init__.py
