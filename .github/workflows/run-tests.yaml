@@ -15,4 +15,4 @@ jobs:
       with:
         compose-file: "./docker-compose.yml"
     - name: Run Tests
-      run: docker exec -it money-sync-api-app-1 pytest tests/__init__.py
+      run: docker exec money-sync-api-app-1 pytest tests/__init__.py
