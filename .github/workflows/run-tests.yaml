@@ -13,6 +13,6 @@ jobs:
     - name: Run docker compose
       uses: hoverkraft-tech/compose-action@v2.0.1
       with:
-        compose-file: "../docker-compose.yml"
+        compose-file: "./docker-compose.yml"
     - name: Run Tests
       run: docker exec -it money-sync-api-app pytest tests/__init__.py
