@@ -14,6 +14,8 @@ services:
         - MS_DB__uri=postgresql://postgres:postgres@db:5432/postgres
         - MS_DB__connect_args={}
         - MS_DB__echo=false
+        - MS_ENV=${MS_ENV}
+        - MS_SECURITY__SECRET_KEY=${MS_SECURITY__SECRET_KEY}
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
